@@ -7,9 +7,7 @@ import {
 import saveToFile from "./service/saveData";
 import CONFIG_LIST, { ConfigItem } from "./config";
 
-init();
-
-async function init() {
+async function main() {
   try {
     if (!checkConfig(CONFIG_LIST)) {
       console.warn("请先完善 config.ts");
@@ -102,3 +100,5 @@ function checkConfig(list: ConfigItem[]) {
     list.every((config) => Object.keys(config).every((k) => config[k] !== ""))
   );
 }
+
+export default main;

@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import {
   BASE_URL,
   HEADER_USER_AGENT,
@@ -6,7 +6,7 @@ import {
   RESPONST_STATUS_OK
 } from './constants';
 
-const instance = Axios.create({
+const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'user-agent': HEADER_USER_AGENT,

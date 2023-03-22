@@ -3,6 +3,39 @@ import { POST_LIST_API } from './constants';
 import { BaseUser } from './base';
 import { PostsList } from './list';
 
+interface FormatPathParams {
+  [key: string]: string | number | undefined;
+  value: string;
+  containerid?: string;
+  since_id?: number;
+}
+
+/**
+ * 对请求url进行拼接
+ * @param uid
+ * @param containerid
+ * @returns
+ */
+function _formatPostPath(
+  uid: string,
+  containerid?: string,
+  since_id?: number
+): string {
+  const params: FormatPathParams = {
+    value: uid,
+    containerid,
+    since_id
+  };
+  let str = '';
+  Object.keys(params).forEach((k) => {
+    if (params[k]) {
+      str += `&${k}=${params[k]}`;
+    }
+  });
+
+  return str;
+}
+
 /**
  * 获取基本用户数据
  * @param uid
@@ -40,37 +73,4 @@ export async function getPostsList(
   } catch (e) {
     return Promise.reject(e);
   }
-}
-
-interface FormatPathParams {
-  [key: string]: string | number | undefined;
-  value: string;
-  containerid?: string;
-  since_id?: number;
-}
-
-/**
- * 对请求url进行拼接
- * @param uid
- * @param containerid
- * @returns
- */
-function _formatPostPath(
-  uid: string,
-  containerid?: string,
-  since_id?: number
-): string {
-  const params: FormatPathParams = {
-    value: uid,
-    containerid,
-    since_id
-  };
-  let str = '';
-  Object.keys(params).forEach((k) => {
-    if (params[k]) {
-      str += `&${k}=${params[k]}`;
-    }
-  });
-
-  return str;
 }
